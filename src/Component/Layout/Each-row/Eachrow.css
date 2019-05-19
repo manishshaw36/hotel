@@ -1,0 +1,14 @@
+.same {
+    height: auto;
+    min-width: 35px;
+    font-size: 20px;
+    line-height: 1;
+    font-weight: 800;
+}
+i.icon {
+    font-size: 30px;
+    padding-top: 4px;
+}
+.btn {
+    cursor: pointer;
+}
