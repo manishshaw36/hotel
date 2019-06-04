@@ -3,49 +3,22 @@ import './Eachrow.css';
 import Icon from '../Icon/icon';
 
 class EachRow extends React.Component {
-  state = {
-    plus: false,
-    minus: false
-  }
 
   componentWillMount() {
-    this.disabledHandler(this.props);
+    this.props.disabledHandler(this.props);
   }
 
   componentWillReceiveProps(props) {
-    this.disabledHandler(props);
+    let { number, disabledHandler, total } = this.props;
+    if(number !== props.number || total !== props.total) disabledHandler(props);
   }
-
-  disabledHandler = (props) => {
-    let { name, number, total, limit } = props;
-    const newNumber = parseInt(number);
-    const newTotal = parseInt(total);
-    const maxLimit = parseInt(limit);
-
-    if(name === "ROOMS") { // If rooms is selected
-      if(newNumber <= 1) this.setState({ minus: true });
-      else if(newNumber >= maxLimit) this.setState({ plus: true });
-      else this.setState({ plus: false, minus: false });
-    } else if(name === "ADULTS") { // If adults is selected
-      if(newNumber <= 1) this.setState({ minus: true });
-      else this.setState({ plus: false, minus: false });
-      if(newTotal >= maxLimit) this.setState({ plus: true });
-      else this.setState({ plus: false });
-    } else { // If children is selected
-      if(newNumber <= 0) this.setState({ minus: true });
-      else this.setState({ plus: false, minus: false });
-      if(newTotal >= maxLimit) this.setState({ plus: true });
-      else this.setState({ plus: false });
-    }
-  }
-
+ 
   handler = (name, icon) => {
     this.props.handler(name, icon);
   }
 
   render() {
-    const { name, icon, number } = this.props;
-    const { plus, minus } = this.state;
+    const { name, icon, number, plus, minus } = this.props;
     return (
       <div className="d-flex justify-content-between">
           <div className="d-flex">
